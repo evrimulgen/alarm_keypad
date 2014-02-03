@@ -4,7 +4,6 @@ require 'json'
 require 'alarm_decoder'
 
 set :server, :thin
-connections = []
 
 get '/' do
   haml :keypad

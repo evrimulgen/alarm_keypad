@@ -1,0 +1,53 @@
+GIT
+  remote: git@github.com:jordanbyron/alarm_decoder.git
+  revision: 89b70f886f9d22aa997fac63063ec1dd016fa421
+  specs:
+    alarm_decoder (0.0.1)
+      highline (>= 1.6.20)
+      prowl (>= 0.1.3)
+      redis (>= 3.0.7)
+      serialport (>= 1.3.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.3.5)
+    daemons (1.1.9)
+    em-websocket (0.3.8)
+      addressable (>= 2.1.1)
+      eventmachine (>= 0.12.9)
+    eventmachine (1.0.3)
+    haml (4.0.5)
+      tilt
+    highline (1.6.20)
+    prowl (0.1.3)
+    rack (1.5.2)
+    rack-protection (1.5.2)
+      rack
+    redis (3.0.7)
+    sass (3.2.14)
+    serialport (1.3.0)
+    sinatra (1.4.4)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
+    sinatra-websocket (0.3.0)
+      em-websocket (~> 0.3.6)
+      eventmachine
+      thin (>= 1.3.1)
+    thin (1.6.1)
+      daemons (>= 1.0.9)
+      eventmachine (>= 1.0.0)
+      rack (>= 1.0.0)
+    tilt (1.4.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  alarm_decoder!
+  haml
+  sass
+  sinatra
+  sinatra-websocket
+  thin

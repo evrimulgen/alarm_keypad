@@ -2,7 +2,7 @@ $(function() {
   FastClick.attach(document.body);
   var stream = new EventSource('/stream');
   var clearState = function($console){
-    $console.removeClass("alarm-sounding armed ready").text()
+    $console.removeClass("alarm-sounding armed ready").text('Connecting ...')
   };
   stream.onerror = function(e) {
     $console = $('#status h1');
@@ -13,13 +13,21 @@ $(function() {
     var status = JSON.parse(e.data);
     $console = $('#status h1')
     clearState($console)
+
+    zone = "Zone " + status.zone_number
+    if(status.zone_name) zone = status.zone_name
+
     if(status["ALARM SOUNDING"]){
-      $console.text("ALARM").addClass("alarm-sounding")
+      $console.text("ALARM: " + zone).addClass("alarm-sounding")
+    } else if(status["FIRE"]){
+      $console.text("FIRE").addClass("alarm-sounding")
     } else if(status["ARMED HOME"] || status["ARMED AWAY"]) {
       type = status["ARMED HOME"] ? "stay" : "away"
       $console.text("Armed " + type).addClass("armed")
     } else if(status["READY"]) {
       $console.text("Ready").addClass("ready")
+    } else if(status["ZONE ISSUE"]){
+      $console.text(zone)
     }
   }
 });

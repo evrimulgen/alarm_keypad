@@ -1,8 +1,8 @@
 $(function() {
   FastClick.attach(document.body);
-  var stream = new EventSource('/stream');
+  var stream = new EventSource(window.location.href + '/stream');
   var clearState = function($console){
-    $console.removeClass("alarm-sounding armed ready").text('Connecting ...')
+    $console.removeClass("alarm-sounding armed ready").text('Connecting')
   };
   stream.onerror = function(e) {
     $console = $('#status h1');
@@ -26,30 +26,30 @@ $(function() {
       $console.text("Armed " + type).addClass("armed")
     } else if(status["READY"]) {
       $console.text("Ready").addClass("ready")
-    } else if(status["ZONE ISSUE"]){
+    } else {
       $console.text(zone)
     }
   }
-});
 
-$(document).on('click', 'a', function(e){
-  var click = $('#click')[0];
+  $('a').click(function(e){
+    var click = $('#click')[0];
 
-  click.load();
-  click.play();
+    click.load();
+    click.play();
 
-  var $button = $(this);
-  var val = $button.text();
-  switch(val){
-    case "OFF":
-      val = 1;
-      break;
-    case "AWAY":
-      val = 2;
-      break;
-    case "STAY":
-      val = 3;
-      break;
-  }
-  $.post('/write', {key: val})
+    var $button = $(this);
+    var val = $button.text();
+    switch(val){
+      case "OFF":
+        val = 1;
+        break;
+      case "AWAY":
+        val = 2;
+        break;
+      case "STAY":
+        val = 3;
+        break;
+    }
+    $.post(window.location.href + '/write', {key: val})
+  });
 });

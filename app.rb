@@ -4,10 +4,27 @@ require 'sinatra'
 require 'sinatra/namespace'
 require 'json'
 require 'alarm_decoder'
+require_relative './stream'
 
 Dotenv.load
 
 set :server, :thin
+
+# Setup Redis
+Thread.abort_on_exception = true
+
+trap('TERM') do
+  Stream.disable!
+  Process.kill('INT', $$)
+end
+
+EM::next_tick do
+  Thread.new do
+    AlarmDecoder.watch do |status|
+      Stream.publish(:status, status.to_json)
+    end
+  end
+end
 
 get '/stylesheets/custom.css' do
   sass :custom, :style => :expanded
@@ -19,16 +36,16 @@ namespace "/#{ENV['ALARM_KEYPAD_SECRET']}" do
   end
 
   post '/write' do
-    AlarmDecoder.write params['key']
+    AlarmDecoder.write(params['key'])
   end
 
   get '/stream', provides: 'text/event-stream' do
-    stream :keep_open do |out|
-      AlarmDecoder.watch do |status|
-        json_status = JSON.pretty_generate(status).split("\n").
-          map {|s| "data: #{s}\n" }.join
-        out << json_status + "\n"
-      end
+    error 402 unless Stream.enabled?
+
+    stream(:keep_open) do |out|
+      stream = Stream.new(out)
+      out.callback { stream.close! }
+      out.errback  { stream.close! }
     end
   end
 end

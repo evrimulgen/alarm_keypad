@@ -1,2 +1,4 @@
 .sass-cache
 .env
+config/keypad.god
+log

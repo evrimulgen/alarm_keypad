@@ -9,7 +9,7 @@ $(function() {
     clearState($console)
     $console.text("Comm Error").addClass("alarm-sounding");
   }
-  stream.onmessage = function(e) {
+  stream.addEventListener('status', function(e) {
     var status = JSON.parse(e.data);
     $console = $('#status h1')
     clearState($console)
@@ -17,19 +17,23 @@ $(function() {
     zone = "Zone " + status.zone_number
     if(status.zone_name) zone = status.zone_name
 
-    if(status["ALARM SOUNDING"]){
+    if(status.alarm_sounding){
       $console.text("ALARM: " + zone).addClass("alarm-sounding")
-    } else if(status["FIRE"]){
+    } else if(status.fire){
       $console.text("FIRE").addClass("alarm-sounding")
-    } else if(status["ARMED HOME"] || status["ARMED AWAY"]) {
-      type = status["ARMED HOME"] ? "stay" : "away"
+    } else if(status.armed_home || status.armed_away) {
+      type = status.armed_home ? "stay" : "away"
       $console.text("Armed " + type).addClass("armed")
-    } else if(status["READY"]) {
+    } else if(status.ready) {
       $console.text("Ready").addClass("ready")
     } else {
       $console.text(zone)
     }
-  }
+  });
+
+  stream.addEventListener('keepalive', function(e) {
+    console.debug("Keep Alive");
+  });
 
   $('a').click(function(e){
     var click = $('#click')[0];

@@ -1,9 +1,10 @@
 GIT
   remote: git@github.com:jordanbyron/alarm_decoder.git
-  revision: 89b70f886f9d22aa997fac63063ec1dd016fa421
+  revision: 965215c5c8c8c166d32fb8318076c7158e31740c
   specs:
-    alarm_decoder (0.0.1)
+    alarm_decoder (0.0.2)
       highline (>= 1.6.20)
+      mail
       prowl (>= 0.1.3)
       redis (>= 3.0.7)
       serialport (>= 1.3.0)
@@ -22,7 +23,12 @@ GEM
     haml (4.0.5)
       tilt
     highline (1.6.20)
+    mail (2.5.4)
+      mime-types (~> 1.16)
+      treetop (~> 1.4.8)
+    mime-types (1.25.1)
     multi_json (1.8.4)
+    polyglot (0.3.4)
     prowl (0.1.3)
     rack (1.5.2)
     rack-protection (1.5.2)
@@ -52,6 +58,9 @@ GEM
       eventmachine (>= 1.0.0)
       rack (>= 1.0.0)
     tilt (1.4.1)
+    treetop (1.4.15)
+      polyglot
+      polyglot (>= 0.3.1)
 
 PLATFORMS
   ruby

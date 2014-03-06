@@ -10,6 +10,9 @@ Dotenv.load
 
 set :server, :thin
 
+REDIS_HOST = ENV['REDIS_HOST']
+REDIS_PORT = ENV['REDIS_PORT']
+
 # Setup Redis
 Thread.abort_on_exception = true
 
@@ -20,7 +23,8 @@ end
 
 EM::next_tick do
   Thread.new do
-    AlarmDecoder.watch do |status|
+    redis = Redis.new(host: REDIS_HOST, port: REDIS_PORT)
+    AlarmDecoder.watch(redis) do |status|
       Stream.publish(:status, status.to_json)
     end
   end
@@ -36,7 +40,8 @@ namespace "/#{ENV['ALARM_KEYPAD_SECRET']}" do
   end
 
   post '/write' do
-    AlarmDecoder.write(params['key'])
+    redis = Redis.new(host: REDIS_HOST, port: REDIS_PORT)
+    AlarmDecoder.write(params['key'], redis)
   end
 
   get '/stream', provides: 'text/event-stream' do

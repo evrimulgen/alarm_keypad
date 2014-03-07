@@ -9,13 +9,13 @@ $(window.Keypad).on('init', function(event, stream) {
   });
 
   $('#garage-door-state img').click(function(){
-    var icon = $(this)
+    var icon = $(this);
+    $.post(window.location.href + '/toggle');
+
     if(!icon.hasClass("loading")){
       icon.addClass("loading");
-
-      $.post(window.location.href + '/toggle')
-
-      setTimeout(function() { icon.removeClass("loading"); }, 5000);
+      // It takes about 13 seconds for my garage door to open. YYMV
+      setTimeout(function() { icon.removeClass("loading"); }, 13000);
     }
   });
 });

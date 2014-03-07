@@ -1,8 +1,9 @@
 #container
   padding: 0 15px
-  .col-xs-4, #status
+  .col-xs-4, #status, .col-xs-8
     padding-left: 5px
     padding-right: 5px
+
 #status h1
   text-align: center
   background-color: #eee
@@ -18,10 +19,38 @@
   &.armed
     color: #d9534f
 
-a.btn
+.col-xs-4 a.btn
   box-sizing: border-box
   font-size: 1.5em
   width: 100%
   margin: 5px 0
   height: 75px
   line-height: 62px
+
+a.btn:hover
+  background-color: inherit
+
+.col-xs-8 a.btn
+  box-sizing: border-box
+  margin: 5px 0
+  height: 54px
+  line-height: 41px
+  width: 61px
+  border-color: #ccc
+  &.btn-default
+    color: inherit
+
+#garage-door-state
+  text-align: center
+  img.loading
+    -webkit-animation-name: pulse
+    -webkit-animation-duration: 0.75s
+    -webkit-animation-direction: alternate
+    -webkit-animation-timing-function: ease-in-out
+    -webkit-animation-iteration-count: infinite
+
+@-webkit-keyframes pulse
+  0%
+    opacity: 0.7
+  100%
+    opacity: 0.2

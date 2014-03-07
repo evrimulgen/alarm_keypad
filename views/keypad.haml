@@ -1,14 +1,16 @@
 .container-fluid
   .row
     #status.col-xs-12
-      %h1 Connecting
+      %h1
+        Connecting
   .row
-    .col-xs-4
-      %a.btn.btn-primary OFF
-    .col-xs-4
-      %a.btn.btn-danger AWAY
-    .col-xs-4
-      %a.btn.btn-danger STAY
+    .col-xs-8
+      .btn-group
+        %a.btn.btn-default.text-primary OFF
+        %a.btn.btn-default.text-danger AWAY
+        %a.btn.btn-default.text-danger STAY
+    #garage-door-state.col-xs-4
+      %img.loading.init{src: '/images/garage_door_closed.png'}
   .row
     .col-xs-4
       %a.btn.btn-default 1
@@ -37,6 +39,5 @@
       %a.btn.btn-default 0
     .col-xs-4
       %a.btn.btn-default #
-
 %audio#click
   %source(src="/click.mp3" type="audio/mpeg")

@@ -1,4 +1,8 @@
-var Keypad = {};
+var Keypad = {passcode: ''};
+
+Keypad.clearState = function($console){
+  $console.removeClass("alarm-sounding armed ready").text('Connecting')
+};
 
 $(function() {
   FastClick.attach(document.body);
@@ -6,7 +10,10 @@ $(function() {
 
   stream.onerror = function(e) {
     $console = $('#status h1');
-    clearState($console)
+<<<<<<< Updated upstream
+=======
+    Keypad.clearState($console)
+>>>>>>> Stashed changes
     $console.text("Comm Error").addClass("alarm-sounding");
   }
 

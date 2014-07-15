@@ -1,4 +1,5 @@
 #container
+  font-family: Helvetica Neue
   padding: 0 15px
   .col-xs-4, #status, .col-xs-8
     padding-left: 5px
@@ -10,6 +11,7 @@
   padding: 15px
   border-radius: 4px
   color: #555
+  font-weight: 300
   &.ready
     background-color: #3c763d
     color: #fff
@@ -19,38 +21,62 @@
   &.armed
     color: #d9534f
 
-.col-xs-4 a.btn
+.col-xs-4
+  text-align: center
+  a.btn
+    color: #000
+    font-weight: 100
+    box-sizing: border-box
+    font-size: 2em
+    margin: 5px 0
+    height: 75px
+    width: 75px
+    border-radius: 75px
+    line-height: 60px
+
+a
+  &.clicked
+    -webkit-animation-name: background-flash
+    -webkit-animation-duration: 0.25s
+    -webkit-animation-timing-function: ease-out
+  &:hover
+    background-color: inherit !important
+
+.row .controls
+  margin-bottom: 10px
+.col-xs-8 a
   box-sizing: border-box
+  margin: 5px 0
+  padding: 20px 10px
+  line-height: 55px
   font-size: 1.5em
-  width: 100%
-  margin: 5px 0
-  height: 75px
-  line-height: 62px
-
-a.btn:hover
-  background-color: inherit
-
-.col-xs-8 a.btn
-  box-sizing: border-box
-  margin: 5px 0
-  height: 54px
-  line-height: 41px
-  width: 61px
-  border-color: #ccc
-  &.btn-default
-    color: inherit
+  font-weight: 200
+  border-radius: 10px
+  &:hover
+    text-decoration: none
 
 #garage-door-state
   text-align: center
-  img.loading
-    -webkit-animation-name: pulse
-    -webkit-animation-duration: 0.75s
-    -webkit-animation-direction: alternate
-    -webkit-animation-timing-function: ease-in-out
-    -webkit-animation-iteration-count: infinite
+  img
+    &.loading, &.opening
+      -webkit-animation-name: pulse
+      -webkit-animation-duration: 0.75s
+      -webkit-animation-direction: alternate
+      -webkit-animation-timing-function: ease-in-out
+    &.loading
+      -webkit-animation-iteration-count: infinite
+    &.opening
+      -webkit-animation-iteration-count: 17
 
 @-webkit-keyframes pulse
   0%
     opacity: 0.7
   100%
     opacity: 0.2
+@-webkit-keyframes background-flash
+  20%
+    background-color: #5CB85C
+    border-color: #4CAE4C
+  100%
+    background-color: #FFF
+    border-color: #CCC

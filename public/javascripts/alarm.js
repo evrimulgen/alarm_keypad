@@ -67,6 +67,10 @@ $(window.Keypad).on('init', function(event, stream) {
     }
     $('#status h1').html(display);
 
+    this.classList.remove("clicked");
+    this.offsetWidth = this.offsetWidth;
+    this.classList.add("clicked");
+
     if(window.Keypad.passcode.length == 4){
       window.Keypad.alarm(event, stream);
     }

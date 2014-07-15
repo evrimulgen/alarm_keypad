@@ -26,13 +26,9 @@ window.Keypad.alarm = function(event, stream) {
   });
 
   $('#command-row a').click(function(e){
-    var click = $('#click')[0];
-
-    click.load();
-    click.play();
-
     var $button = $(this);
     var val = $button.text();
+
     switch(val){
       case "Off":
         val = 1;
@@ -45,6 +41,10 @@ window.Keypad.alarm = function(event, stream) {
         break;
     }
     $.post(window.location.href + '/write', {key: window.Keypad.passcode + val})
+
+    this.classList.remove("clicked");
+    this.offsetWidth = this.offsetWidth;
+    this.classList.add("clicked");
   });
 
   Keypad.clearState($console);
@@ -52,11 +52,6 @@ window.Keypad.alarm = function(event, stream) {
 
 $(window.Keypad).on('init', function(event, stream) {
   $('#keypad a').click(function(e){
-    var click = $('#click')[0];
-
-    click.load();
-    click.play();
-
     var $button = $(this);
     var val = $button.text();
 

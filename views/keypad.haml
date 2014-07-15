@@ -3,13 +3,17 @@
     #status.col-xs-12
       %h1
         Passcode?
-  #command-row.row.hidden.controls
-    .col-xs-8
-      %a.text-primary Off
-      %a.text-danger Away
-      %a.text-danger Stay
-    #garage-door-state.col-xs-4
-      %img.loading.init{src: '/images/garage_door_closed.png'}
+  #command-row.hidden
+    .row
+      .col-xs-4
+        %a.text-primary Off
+      .col-xs-4
+        %a.text-danger Away
+      .col-xs-4
+        %a.text-danger Stay
+    .row
+      #garage-door-state.col-xs-12.text-center
+        %img.loading.init{src: '/images/garage_door_closed.png'}
   #keypad
     .row
       .col-xs-4
@@ -39,5 +43,3 @@
         %a.btn.btn-default 0
       .col-xs-4
         %a.btn.btn-default #
-%audio#click
-  %source(src="/click.mp3" type="audio/mpeg")

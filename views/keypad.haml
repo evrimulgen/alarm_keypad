@@ -2,8 +2,8 @@
   .row
     #status.col-xs-12
       %h1
-        Connecting
-  .row
+        Passcode?
+  #command-row.row.hidden
     .col-xs-8
       .btn-group
         %a.btn.btn-default.text-primary OFF
@@ -11,33 +11,34 @@
         %a.btn.btn-default.text-danger STAY
     #garage-door-state.col-xs-4
       %img.loading.init{src: '/images/garage_door_closed.png'}
-  .row
-    .col-xs-4
-      %a.btn.btn-default 1
-    .col-xs-4
-      %a.btn.btn-default 2
-    .col-xs-4
-      %a.btn.btn-default 3
-  .row
-    .col-xs-4
-      %a.btn.btn-default 4
-    .col-xs-4
-      %a.btn.btn-default 5
-    .col-xs-4
-      %a.btn.btn-default 6
-  .row
-    .col-xs-4
-      %a.btn.btn-default 7
-    .col-xs-4
-      %a.btn.btn-default 8
-    .col-xs-4
-      %a.btn.btn-default 9
-  .row
-    .col-xs-4
-      %a.btn.btn-default *
-    .col-xs-4
-      %a.btn.btn-default 0
-    .col-xs-4
-      %a.btn.btn-default #
+  #keypad
+    .row
+      .col-xs-4
+        %a.btn.btn-default 1
+      .col-xs-4
+        %a.btn.btn-default 2
+      .col-xs-4
+        %a.btn.btn-default 3
+    .row
+      .col-xs-4
+        %a.btn.btn-default 4
+      .col-xs-4
+        %a.btn.btn-default 5
+      .col-xs-4
+        %a.btn.btn-default 6
+    .row
+      .col-xs-4
+        %a.btn.btn-default 7
+      .col-xs-4
+        %a.btn.btn-default 8
+      .col-xs-4
+        %a.btn.btn-default 9
+    .row
+      .col-xs-4
+        %a.btn.btn-default *
+      .col-xs-4
+        %a.btn.btn-default 0
+      .col-xs-4
+        %a.btn.btn-default #
 %audio#click
   %source(src="/click.mp3" type="audio/mpeg")

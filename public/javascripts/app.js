@@ -1,4 +1,4 @@
-var Keypad = {};
+var Keypad = {passcode: ''};
 
 $(function() {
   FastClick.attach(document.body);
@@ -6,7 +6,6 @@ $(function() {
 
   stream.onerror = function(e) {
     $console = $('#status h1');
-    clearState($console)
     $console.text("Comm Error").addClass("alarm-sounding");
   }
 

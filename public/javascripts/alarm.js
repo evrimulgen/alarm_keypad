@@ -1,11 +1,12 @@
-$(window.Keypad).on('init', function(event, stream) {
+window.Keypad.alarm = function(event, stream) {
+  var $console = $('#status h1');
+
   var clearState = function($console){
     $console.removeClass("alarm-sounding armed ready").text('Connecting')
   };
 
   stream.addEventListener('status', function(e) {
     var status = JSON.parse(e.data);
-    $console = $('#status h1')
     clearState($console)
 
     zone = "Zone " + status.zone_number
@@ -25,7 +26,7 @@ $(window.Keypad).on('init', function(event, stream) {
     }
   });
 
-  $('a').click(function(e){
+  $('#command-row a').click(function(e){
     var click = $('#click')[0];
 
     click.load();
@@ -44,6 +45,32 @@ $(window.Keypad).on('init', function(event, stream) {
         val = 3;
         break;
     }
-    $.post(window.location.href + '/write', {key: val})
+    $.post(window.location.href + '/write', {key: window.Keypad.passcode + val})
+  });
+
+  clearState($console);
+}
+
+$(window.Keypad).on('init', function(event, stream) {
+  $('#keypad a').click(function(e){
+    var click = $('#click')[0];
+
+    click.load();
+    click.play();
+
+    var $button = $(this);
+    var val = $button.text();
+
+    window.Keypad.passcode += val;
+    var display = "";
+    for(i = 0; i < window.Keypad.passcode.length; i++) {
+      display += "&nbsp;&bull;&nbsp;"
+    }
+    $('#status h1').html(display);
+    if(window.Keypad.passcode.length == 4){
+      $('#keypad').hide();
+      $('#command-row').removeClass('hidden');
+      window.Keypad.alarm(event, stream);
+    }
   });
 });

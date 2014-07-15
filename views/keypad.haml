@@ -3,12 +3,11 @@
     #status.col-xs-12
       %h1
         Passcode?
-  #command-row.row.hidden
+  #command-row.row.hidden.controls
     .col-xs-8
-      .btn-group
-        %a.btn.btn-default.text-primary OFF
-        %a.btn.btn-default.text-danger AWAY
-        %a.btn.btn-default.text-danger STAY
+      %a.text-primary Off
+      %a.text-danger Away
+      %a.text-danger Stay
     #garage-door-state.col-xs-4
       %img.loading.init{src: '/images/garage_door_closed.png'}
   #keypad

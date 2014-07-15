@@ -1,13 +1,12 @@
 window.Keypad.alarm = function(event, stream) {
   var $console = $('#status h1');
 
-  var clearState = function($console){
-    $console.removeClass("alarm-sounding armed ready").text('Connecting')
-  };
+  $('#keypad').hide();
+  $('#command-row').removeClass('hidden');
 
   stream.addEventListener('status', function(e) {
     var status = JSON.parse(e.data);
-    clearState($console)
+    Keypad.clearState($console)
 
     zone = "Zone " + status.zone_number
     if(status.zone_name) zone = status.zone_name
@@ -35,20 +34,20 @@ window.Keypad.alarm = function(event, stream) {
     var $button = $(this);
     var val = $button.text();
     switch(val){
-      case "OFF":
+      case "Off":
         val = 1;
         break;
-      case "AWAY":
+      case "Away":
         val = 2;
         break;
-      case "STAY":
+      case "Stay":
         val = 3;
         break;
     }
     $.post(window.location.href + '/write', {key: window.Keypad.passcode + val})
   });
 
-  clearState($console);
+  Keypad.clearState($console);
 }
 
 $(window.Keypad).on('init', function(event, stream) {
@@ -67,9 +66,8 @@ $(window.Keypad).on('init', function(event, stream) {
       display += "&nbsp;&bull;&nbsp;"
     }
     $('#status h1').html(display);
+
     if(window.Keypad.passcode.length == 4){
-      $('#keypad').hide();
-      $('#command-row').removeClass('hidden');
       window.Keypad.alarm(event, stream);
     }
   });

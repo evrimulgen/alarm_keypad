@@ -4,7 +4,7 @@
       %h1
         Passcode?
   #command-row.hidden
-    .row
+    .row.controls
       .col-xs-4
         %a.text-primary Off
       .col-xs-4
@@ -14,6 +14,9 @@
     .row
       #garage-door-state.col-xs-12.text-center
         %img.loading.init{src: '/images/garage_door_closed.png'}
+    .row
+      .col-xs-12.text-center
+        %a#reset-passcode Reset Passcode
   #keypad
     .row
       .col-xs-4

@@ -1,10 +1,23 @@
+window.Keypad.toggleKeypad = function(){
+  $keypad = $('#keypad')
+
+  if($keypad.is(':visible')){
+    $('#keypad').hide();
+    $('#command-row').removeClass('hidden');
+  } else {
+    $('#keypad').show();
+    $('#command-row').addClass('hidden');
+  }
+}
+
 window.Keypad.alarm = function(event, stream) {
   var $console = $('#status h1');
 
-  $('#keypad').hide();
-  $('#command-row').removeClass('hidden');
+  window.Keypad.toggleKeypad();
 
-  stream.addEventListener('status', function(e) {
+  if(Keypad.statusListener) return true;
+
+  Keypad.statusListener = stream.addEventListener('status', function(e) {
     var status = JSON.parse(e.data);
     Keypad.clearState($console)
 
@@ -25,7 +38,7 @@ window.Keypad.alarm = function(event, stream) {
     }
   });
 
-  $('#command-row a').click(function(e){
+  $('#command-row .controls a').click(function(e){
     var $button = $(this);
     var val = $button.text();
 
@@ -45,6 +58,11 @@ window.Keypad.alarm = function(event, stream) {
     this.classList.remove("clicked");
     this.offsetWidth = this.offsetWidth;
     this.classList.add("clicked");
+  });
+
+  $('a#reset-passcode').click(function(){
+    window.Keypad.passcode = '';
+    window.Keypad.toggleKeypad();
   });
 
   Keypad.clearState($console);

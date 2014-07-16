@@ -3,7 +3,7 @@ $(window.Keypad).on('init', function(event, stream) {
     var state = e.data;
     var icon  = $("#garage-door-state img");
 
-    icon.attr("src", "/images/garage_door_" + state + ".png")
+    icon.attr("src", "/images/garage_door_" + state + ".png?v=2")
       .removeClass('loading');
   });
 

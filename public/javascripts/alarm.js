@@ -15,8 +15,6 @@ window.Keypad.alarm = function(event, stream) {
 
   window.Keypad.toggleKeypad();
 
-  if(Keypad.statusListener) return true;
-
   Keypad.statusListener = stream.addEventListener('status', function(e) {
     var status = JSON.parse(e.data);
     Keypad.clearState($console)

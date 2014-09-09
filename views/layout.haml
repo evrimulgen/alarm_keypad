@@ -12,10 +12,11 @@
     %link(rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css")
     %link(rel="stylesheet" href="/stylesheets/custom.css")
 
-  %body
+  %body.loading
+    .pulse
     #container=yield
     %script(src="//code.jquery.com/jquery-1.10.1.min.js")
     %script(src="/javascripts/fastclick.js")
-    %script(src="/javascripts/app.js?v=3")
+    %script(src="/javascripts/app.js?v=4")
     %script(src="/javascripts/alarm.js?v=5")
     %script(src="/javascripts/garage_door.js?v=2")

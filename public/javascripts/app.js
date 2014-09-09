@@ -18,5 +18,9 @@ $(function() {
     console.debug("Keep Alive");
   });
 
+  $('body').removeClass('loading');
+  $('.pulse').remove();
+  $('#container').show();
+
   $(window.Keypad).trigger('init', [stream]);
 });

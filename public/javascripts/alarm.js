@@ -67,23 +67,33 @@ window.Keypad.alarm = function(event, stream) {
 }
 
 $(window.Keypad).on('init', function(event, stream) {
-  $('#keypad a').click(function(e){
-    var $button = $(this);
-    var val = $button.text();
-
-    window.Keypad.passcode += val;
-    var display = "";
-    for(i = 0; i < window.Keypad.passcode.length; i++) {
-      display += "&nbsp;&bull;&nbsp;"
-    }
-    $('#status h1').html(display);
-
-    this.classList.remove("clicked");
-    this.offsetWidth = this.offsetWidth;
-    this.classList.add("clicked");
-
-    if(window.Keypad.passcode.length == 4){
-      window.Keypad.alarm(event, stream);
-    }
+  $('#reset a').click(function(e){
+    localStorage.removeItem('passcode');
   });
+
+  if(window.Keypad.passcode.length == 4){
+    window.Keypad.alarm(event, stream);
+  }
+  else {
+    $('#keypad a').click(function(e){
+      var $button = $(this);
+      var val = $button.text();
+
+      window.Keypad.passcode += val;
+      var display = "";
+      for(i = 0; i < window.Keypad.passcode.length; i++) {
+        display += "&nbsp;&bull;&nbsp;"
+      }
+      $('#status h1').html(display);
+
+      this.classList.remove("clicked");
+      this.offsetWidth = this.offsetWidth;
+      this.classList.add("clicked");
+
+      if(window.Keypad.passcode.length == 4){
+        localStorage.setItem("passcode", window.Keypad.passcode);
+        window.Keypad.alarm(event, stream);
+      }
+    });
+  }
 });

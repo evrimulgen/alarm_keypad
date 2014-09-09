@@ -1,4 +1,4 @@
-var Keypad = {passcode: ''};
+var Keypad = {passcode: localStorage.getItem("passcode") || ''};
 
 Keypad.clearState = function($console){
   $console.removeClass("alarm-sounding armed ready").text('Connecting')

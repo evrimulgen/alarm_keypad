@@ -1,8 +1,9 @@
 require 'bundler/setup'
 require 'dotenv'
 require 'sinatra'
-require 'sinatra/namespace'
 require 'json'
+require 'haml'
+require 'sass'
 require 'alarm_decoder'
 require_relative './stream'
 require_relative '../garage_door/lib/garage_door'
@@ -10,6 +11,7 @@ require_relative '../garage_door/lib/garage_door'
 Dotenv.load
 
 set :server, :thin
+namespace = ENV['ALARM_KEYPAD_SECRET']
 
 # Setup Redis
 Thread.abort_on_exception = true
@@ -35,26 +37,24 @@ get '/stylesheets/custom.css' do
   sass :custom, :style => :expanded
 end
 
-namespace "/#{ENV['ALARM_KEYPAD_SECRET']}" do
-  get do
-    haml :keypad
-  end
+get "/#{namespace}" do
+  haml :keypad
+end
 
-  post '/write' do
-    AlarmDecoder.write(params['key'])
-  end
+post "/#{namespace}/write" do
+  AlarmDecoder.write(params['key'])
+end
 
-  post '/toggle' do
-    GarageDoor.toggle
-  end
+post "/#{namespace}/toggle" do
+  GarageDoor.toggle
+end
 
-  get '/stream', provides: 'text/event-stream' do
-    error 402 unless Stream.enabled?
+get "/#{namespace}/stream", provides: 'text/event-stream' do
+  error 402 unless Stream.enabled?
 
-    stream(:keep_open) do |out|
-      stream = Stream.new(out)
-      out.callback { stream.close! }
-      out.errback  { stream.close! }
-    end
+  stream(:keep_open) do |out|
+    stream = Stream.new(out)
+    out.callback { stream.close! }
+    out.errback  { stream.close! }
   end
 end

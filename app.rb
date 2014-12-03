@@ -5,8 +5,8 @@ require 'json'
 require 'haml'
 require 'sass'
 require 'alarm_decoder'
+require 'garage_door'
 require_relative './stream'
-require_relative '../garage_door/lib/garage_door'
 
 Dotenv.load
 

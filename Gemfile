@@ -7,4 +7,7 @@ gem 'thin'
 gem 'haml'
 gem 'sass'
 gem 'dotenv'
-gem 'garage_door', git: 'git@github.com:jordanbyron/garage_door.git'
+
+group :production do
+  gem 'garage_door', git: 'git@github.com:jordanbyron/garage_door.git'
+end

@@ -5,8 +5,18 @@ require 'json'
 require 'haml'
 require 'sass'
 require 'alarm_decoder'
-require 'garage_door'
 require_relative './stream'
+
+begin
+  require 'garage_door'
+rescue LoadError
+  puts "Can't load garage door. You're probably dev-ing on a non raspberrypi. That's cool"
+  module GarageDoor
+    def self.state
+      'open'
+    end
+  end
+end
 
 Dotenv.load
 
@@ -43,6 +53,10 @@ end
 
 post "/#{namespace}/write" do
   AlarmDecoder.write(params['key'])
+end
+
+post "/#{namespace}/panic" do
+  AlarmDecoder.panic!
 end
 
 post "/#{namespace}/toggle" do

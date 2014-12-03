@@ -3,10 +3,10 @@ window.Keypad.toggleKeypad = function(){
 
   if($keypad.is(':visible')){
     $('#keypad').hide();
-    $('#command-row').removeClass('hidden');
+    $('#command-row, #panic').removeClass('hidden');
   } else {
     $('#keypad').show();
-    $('#command-row').addClass('hidden');
+    $('#command-row, #panic').addClass('hidden');
   }
 }
 
@@ -61,6 +61,14 @@ window.Keypad.alarm = function(event, stream) {
   $('a#reset-passcode').click(function(){
     window.Keypad.passcode = '';
     window.Keypad.toggleKeypad();
+  });
+
+  $('#panic a').click(function(e){
+    e.preventDefault();
+
+    if(confirm("Are you sure?")){
+      $.post(window.location.href + '/panic')
+    }
   });
 
   Keypad.clearState($console);

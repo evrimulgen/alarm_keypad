@@ -1,5 +1,6 @@
 .sass-cache
 .env
+.bundle
 config/keypad.god
 log
 ssl

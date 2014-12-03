@@ -64,8 +64,6 @@ window.Keypad.alarm = function(event, stream) {
   });
 
   $('#panic a').click(function(e){
-    e.preventDefault();
-
     if(confirm("Are you sure?")){
       $.post(window.location.href + '/panic')
     }

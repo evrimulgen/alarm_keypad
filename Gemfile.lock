@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:jordanbyron/alarm_decoder.git
-  revision: 8d461d69754c85966b692134e787f051e31a8a60
+  revision: ab2c488a344ab28e911d8ebcbfebcf0cc52ac556
   specs:
     alarm_decoder (0.0.4)
       highline (>= 1.6.20)

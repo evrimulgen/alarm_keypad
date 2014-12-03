@@ -10,6 +10,13 @@ window.Keypad.toggleKeypad = function(){
   }
 }
 
+// Hack for iOS
+window.Keypad.panic = function(){
+  if(confirm("Are you sure?")){
+    $.post(window.location.href + '/panic');
+  }
+}
+
 window.Keypad.alarm = function(event, stream) {
   var $console = $('#status h1');
 
@@ -64,9 +71,7 @@ window.Keypad.alarm = function(event, stream) {
   });
 
   $('#panic a').click(function(e){
-    if(confirm("Are you sure?")){
-      $.post(window.location.href + '/panic')
-    }
+    setTimeout(Keypad.panic, 100);
   });
 
   Keypad.clearState($console);

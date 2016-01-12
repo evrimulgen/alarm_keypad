@@ -1,4 +1,4 @@
-module LastUpdate
+module StatusCache
   extend self;
 
   def garage_door
@@ -6,6 +6,7 @@ module LastUpdate
   end
 
   def garage_door=(status)
+    last_update!
     @garage_door = status
   end
 
@@ -14,6 +15,15 @@ module LastUpdate
   end
 
   def alarm=(status)
+    last_update!
     @alarm = status
+  end
+
+  def last_update!
+    @last_update = Time.now
+  end
+
+  def last_update
+    @last_update
   end
 end

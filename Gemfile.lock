@@ -28,7 +28,7 @@ GEM
     em-websocket (0.3.8)
       addressable (>= 2.1.1)
       eventmachine (>= 0.12.9)
-    eventmachine (1.0.3)
+    eventmachine (1.0.9.1)
     haml (4.0.5)
       tilt
     highline (1.6.21)
@@ -73,6 +73,7 @@ PLATFORMS
 DEPENDENCIES
   alarm_decoder!
   dotenv
+  eventmachine (~> 1.0.9.1)
   garage_door!
   haml
   sass
@@ -80,3 +81,6 @@ DEPENDENCIES
   sinatra-contrib
   sinatra-websocket
   thin
+
+BUNDLED WITH
+   1.14.3

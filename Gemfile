@@ -8,6 +8,7 @@ gem 'thin'
 gem 'haml'
 gem 'sass'
 gem 'dotenv'
+gem 'eventmachine', '~> 1.0.9.1'
 
 group :production do
   gem 'garage_door', git: 'git@github.com:jordanbyron/garage_door.git'

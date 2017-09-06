@@ -58,7 +58,7 @@ end
 get "/#{namespace}/status.json" do
   json alarm:        StatusCache.alarm,
        garage_door:  StatusCache.garage_door,
-       last_updated: StatusCache.last_updated
+       last_updated: StatusCache.last_update
 end
 
 post "/#{namespace}/write" do
